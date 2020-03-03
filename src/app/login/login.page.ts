@@ -23,7 +23,10 @@ export class LoginPage implements OnInit {
     try {
       const result = await this.afAuth.auth.signInWithEmailAndPassword(username, password);
     } catch (error) {
-      console.dir('Error with login:', error)
+      console.log('Error with login:', error)
+      if(error.code === "auth/user-not-found"){
+        alert("User not found")
+      }
     }
   }
 
