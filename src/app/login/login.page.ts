@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +13,18 @@ export class LoginPage implements OnInit {
   username: string = "";
   password: string = "";
 
-  constructor() { }
+  constructor(public afAuth: AngularFireAuth) { }
 
   ngOnInit() {
   }
 
-  login(){
-    const { username, password} = this; 
-    console.log(`username: ${username}; password: ${password}`);
+  async login() {
+    const { username, password } = this;
+    try {
+      const result = await this.afAuth.auth.signInWithEmailAndPassword(username, password);
+    } catch (error) {
+      console.dir('Error with login:', error)
+    }
   }
 
 }
