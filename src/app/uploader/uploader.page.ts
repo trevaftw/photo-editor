@@ -13,7 +13,7 @@ import { firestore } from 'firebase/app';
 export class UploaderPage implements OnInit {
 
   //this gets the viewchild button/function from the dom
-  @ViewChild('fileButton', {static: false}) fileButton; 
+  @ViewChild('fileButton', { static: false }) fileButton;
 
   uploadedImage: string;
   imageDescription: string;
@@ -27,7 +27,7 @@ export class UploaderPage implements OnInit {
   ngOnInit() {
   }
 
-  uploadFile(){
+  uploadFile() {
     this.fileButton.nativeElement.click();
   }
 
@@ -60,15 +60,19 @@ export class UploaderPage implements OnInit {
 
     //do update cause if post it would delete old info with new info, we just want to add/update current info
     this.afStore.doc(`users/${this.user.getUID()}`).update({
-      posts: firestore.FieldValue.arrayUnion({
-        uploadedImage,
-        imageDescription
-      })
+      posts: firestore.FieldValue.arrayUnion({ uploadedImage })
+      //because each image gets a unique id from uploadcare, we will use that as our own uid. 
     })
     //todo: add a confirmation of upload and a navigation 
+
+    this.afStore.doc(`posts/${uploadedImage}`).set({
+      imageDescription, 
+      author: this.user.getUsername(),
+      likes: [],
+    })
   }
 
-  getImgSrc(string){
+  getImgSrc(string) {
     return `https://ucarecdn.com/${string}/`
   }
 

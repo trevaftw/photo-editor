@@ -27,10 +27,15 @@ const routes: Routes = [
                 path: 'profile',
                 loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
             },
+            {
+                //this path is a dynamic path that loads based on the id
+                path: 'post/:id',
+                loadChildren: () => import('../post/post.module').then(m => m.PostPageModule)
+            },
 
         ]
     },
-    
+
 ]
 
 @NgModule({

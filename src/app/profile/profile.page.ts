@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,8 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private user: UserService,
-    private afStore: AngularFirestore
+    private afStore: AngularFirestore,
+    private router: Router
   ) {
     const posts = afStore.doc(`users/${user.getUID()}`)
 
@@ -24,8 +26,11 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
   }
 
-  getImgSrc(string){
+  getImgSrc(string: string){
     return `https://ucarecdn.com/${string}/`
   }
 
+  goToPost(postId: string){
+    this.router.navigate([`/tabs/post/${postId}`])
+  }
 }

@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="post | async as postData">
+    <ion-img [src]="getImgSrc(postId)"></ion-img>
+    <ion-card-content>
+      <p>{{postData.imageDescription}}</p>
+      <p>{{postData.comments}}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

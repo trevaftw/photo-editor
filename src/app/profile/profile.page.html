@@ -10,9 +10,9 @@
       the ? stops it from crashings, because it only does it if there are posts -->
     <ion-item class="image" *ngFor="let post of (userPosts | async)?.posts">
       <ion-thumbnail slot="start">
-        <ion-img [src]="getImgSrc(post.uploadedImage)" ></ion-img>
+        <ion-img [src]="getImgSrc(post.uploadedImage)" (click)="goToPost(post.uploadedImage)"></ion-img>
       </ion-thumbnail>
-      <ion-label>{{post.imageDescription}}</ion-label>
+      <!-- <ion-label (click)="goToPost(post.uploadedImage)" >{{post.imageDescription}}</ion-label> -->
     </ion-item>
   </ion-list>
 </ion-content>
