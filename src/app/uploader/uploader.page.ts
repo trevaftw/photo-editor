@@ -18,7 +18,7 @@ export class UploaderPage implements OnInit {
 
   fileChanged(event) {
     const files = event.target.files;
-    if(files[0] === null){
+    if (files[0] === null) {
       return
     }
 
@@ -27,13 +27,14 @@ export class UploaderPage implements OnInit {
     const data = new FormData();
     data.append('UPLOADCARE_PUB_KEY', uploadcareApi);
     data.append('UPLOADCARE_STORE', '1');
-    data.append('file', files[0]); 
+    data.append('file', files[0]);
 
 
     this.http.post('https://upload.uploadcare.com/base/', data)
       .subscribe(event => {
-        console.log('subscribe event', event.file)
-         this.uploadedImage = `https://ucarecdn.com/${event.file}/`;
+        //compiler doesn't like event.file, so we set a new var with type any as a workaround 
+        let imgSource: any = event;
+        this.uploadedImage = `https://ucarecdn.com/${imgSource.file}/`
       })
   }
 
