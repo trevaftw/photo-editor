@@ -7,6 +7,11 @@ import { TabsPage } from './tabs.page';
 const routes: Routes = [
     {
         path: '',
+        redirectTo: '/tabs/feed',
+        pathMatch: 'full'
+    },
+    {
+        path: '',
         component: TabsPage,
         children: [
 
@@ -24,7 +29,8 @@ const routes: Routes = [
             },
 
         ]
-    }
+    },
+    
 ]
 
 @NgModule({
