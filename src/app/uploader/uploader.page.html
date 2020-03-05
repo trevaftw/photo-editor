@@ -7,7 +7,16 @@
 <ion-content>
   <div class="camera">this is a placeholder for the camera</div>
 
-  <input type="file" (change)="fileChanged($event)" />
+  <!-- if uploaded Image doesn't exist, show the input -->
+  <input type="file" *ngIf="!uploadedImage" (change)="fileChanged($event)" />
 
-  <img *ngIf="uploadedImage" src="{{uploadedImage}}" />
+  <ion-card *ngIf="uploadedImage">
+    <img  src="https://ucarecdn.com/{{uploadedImage}}/" />
+    <ion-card-content>
+      <ion-textarea placeholder="Enter some description" [(ngModel)]="imageDescription">
+      </ion-textarea>
+      <ion-button (click)="createPost()">Post</ion-button>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

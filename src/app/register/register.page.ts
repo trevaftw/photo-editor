@@ -42,6 +42,7 @@ export class RegisterPage implements OnInit {
 
       //inside of the users collection in the fire store we create a new user
       // with their uid from the authentication, and username from gistration
+      //this also dynamically created a users table
       this.afStore.doc(`users/${result.user.uid}`).set({username})
 
       //this sets the user for the service being used throughout the code / site

@@ -1,6 +1,9 @@
 import { Component, OnInit, } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import uploadcareApi from './uploadcare';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { UserService } from '../user.service';
+import { firestore } from 'firebase/app';
 
 @Component({
   selector: 'app-uploader',
@@ -9,9 +12,14 @@ import uploadcareApi from './uploadcare';
 })
 export class UploaderPage implements OnInit {
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    public http: HttpClient,
+    public afStore: AngularFirestore,
+    public user: UserService,
+  ) { }
 
   uploadedImage: string;
+  imageDescription: string;
 
   ngOnInit() {
   }
@@ -34,8 +42,22 @@ export class UploaderPage implements OnInit {
       .subscribe(event => {
         //compiler doesn't like event.file, so we set a new var with type any as a workaround 
         let imgSource: any = event;
-        this.uploadedImage = `https://ucarecdn.com/${imgSource.file}/`
+        this.uploadedImage = imgSource.file
+        console.log(this.uploadedImage)
       })
+  }
+
+  createPost() {
+    const uploadedImage = this.uploadedImage;
+    const imageDescription = this.imageDescription;
+
+    //do update cause if post it would delete old info with new info, we just want to add/update current info
+    this.afStore.doc(`users/${this.user.getUID()}`).update({
+      posts: firestore.FieldValue.arrayUnion({
+        uploadedImage,
+        imageDescription
+      })
+    })
   }
 
 }

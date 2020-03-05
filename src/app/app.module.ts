@@ -18,6 +18,7 @@ import { AngularFireModule } from '@angular/fire';
 //required for user authentication 
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { UserService } from './user.service';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,13 +29,14 @@ import { UserService } from './user.service';
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     HttpClientModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    UserService, 
+    UserService,
   ],
   bootstrap: [AppComponent]
 })
