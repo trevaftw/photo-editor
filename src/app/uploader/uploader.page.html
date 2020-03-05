@@ -3,20 +3,27 @@
     <ion-title>Upload Image</ion-title>
   </ion-toolbar>
 </ion-header>
+<input type="file" *ngIf="!uploadedImage" (change)="fileChanged($event)" class="fileButton" #fileButton />
 
 <ion-content>
-  <div class="camera">this is a placeholder for the camera</div>
-
-  <!-- if uploaded Image doesn't exist, show the input -->
-  <input type="file" *ngIf="!uploadedImage" (change)="fileChanged($event)" />
-
-  <ion-card *ngIf="uploadedImage">
-    <img  src="https://ucarecdn.com/{{uploadedImage}}/" />
-    <ion-card-content>
-      <ion-textarea placeholder="Enter some description" [(ngModel)]="imageDescription">
-      </ion-textarea>
-      <ion-button (click)="createPost()">Post</ion-button>
-    </ion-card-content>
-  </ion-card>
+  <div class="center">
+  	<div class="camera">this is a placeholder for the camera</div>
+  
+  	<!-- if uploaded Image doesn't exist, show the input -->
+  	<!-- also going to add styling to hide the native  display for a file upload input by adding a class to hide it with css -->
+  
+  	<div id="uploadButton">
+  	  <ion-button (click)="uploadFile()" *ngIf="!uploadedImage">Upload Image</ion-button>
+  	</div>
+  
+  	<ion-card *ngIf="uploadedImage">
+  	  <ion-img [src]="getImgSrc(uploadedImage)" ></ion-img>
+  	  <ion-card-content>
+  	    <ion-textarea placeholder="Enter some description" [(ngModel)]="imageDescription">
+  	    </ion-textarea>
+  	    <ion-button (click)="createPost()">Post</ion-button>
+  	  </ion-card-content>
+  	</ion-card>
+  </div>
 
 </ion-content>

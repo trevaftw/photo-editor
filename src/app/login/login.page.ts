@@ -23,6 +23,7 @@ export class LoginPage implements OnInit {
     public router: Router) { }
 
   ngOnInit() {
+
   }
 
   async login() {

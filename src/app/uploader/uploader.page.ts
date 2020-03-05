@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, ViewChild, } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import uploadcareApi from './uploadcare';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -12,16 +12,23 @@ import { firestore } from 'firebase/app';
 })
 export class UploaderPage implements OnInit {
 
+  //this gets the viewchild button/function from the dom
+  @ViewChild('fileButton', {static: false}) fileButton; 
+
+  uploadedImage: string;
+  imageDescription: string;
+
   constructor(
     public http: HttpClient,
     public afStore: AngularFirestore,
     public user: UserService,
   ) { }
 
-  uploadedImage: string;
-  imageDescription: string;
-
   ngOnInit() {
+  }
+
+  uploadFile(){
+    this.fileButton.nativeElement.click();
   }
 
   fileChanged(event) {
@@ -58,6 +65,11 @@ export class UploaderPage implements OnInit {
         imageDescription
       })
     })
+    //todo: add a confirmation of upload and a navigation 
+  }
+
+  getImgSrc(string){
+    return `https://ucarecdn.com/${string}/`
   }
 
 }

@@ -3,4 +3,23 @@
     height: 200px;
     background-color: red;
     margin: 0 auto;
+    margin-top: 10px;
+}
+
+.fileButton {
+    opacity: 0;
+    position: absolute;
+    top: -100em;
+    left: -100em;
+}
+
+#uploadButton{
+    margin-top: 10px;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
