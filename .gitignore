@@ -2,6 +2,7 @@
 # http://git-scm.com/docs/gitignore
 
 firebase.ts
+uploadcare.ts
 
 *~
 *.sw[mnpcod]

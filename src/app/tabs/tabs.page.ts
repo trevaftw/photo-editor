@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,  } from '@angular/core';
+import { Component, OnInit, ViewChild, } from '@angular/core';
 import { IonTabs } from '@ionic/angular';
 
 @Component({
@@ -13,6 +13,4 @@ export class TabsPage implements OnInit {
 
   ngOnInit() {
   }
-
-
 }
